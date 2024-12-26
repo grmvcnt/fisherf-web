@@ -2,9 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest, { params }: { params: { queryParams: string } }) {
     try {
-        const queryParams = params.queryParams;
+        const queryParams = (await params).queryParams;
 
-        // Debug : Afficher les paramètres reçus
         console.log("Query Params:", queryParams);
 
         const res = await fetch(`https://preprod-api.notif.immo/documents/properties?transactionType=1&withCoherentPrice=true&${queryParams}`, {

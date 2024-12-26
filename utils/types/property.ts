@@ -17,5 +17,14 @@ export type PropertyType = {
 }
 
 export type PropertyAnalysisType = {
+    city: {
+        zipcode: string,
+    },
     price: number,
+    room: number,
+    surface: number,
+}
+
+export type SimilarPropertyAnalysis = {
+    pricePerMeter: number,
 }

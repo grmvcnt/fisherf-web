@@ -4,10 +4,10 @@ import {FormEvent, useEffect, useState} from "react";
 import PropertyCard from "@/app/components/PropertyCard";
 import {PropertyType} from "@/utils/types/property";
 import AnalyticsPanel from "@/app/components/AnalyticsPanel";
-import {updateFilters} from "@/app/actions/filters/action";
+import {updateFilters} from "@/app/actions/filters/actions";
 import Filters from "@/app/components/Filters";
 
-export default function Home() {
+export default function Discover() {
   const [properties, setProperties] = useState<null | PropertyType[]>(null);
   const [selectedProperty, setSelectedProperty] = useState(null);
   const [property, setProperty] = useState(null);
@@ -73,8 +73,8 @@ export default function Home() {
   if (!properties) return <div>Chargement...</div>;
 
   return (
-      <div className="min-h-screen flex flex-col gap-4">
-        <h1>Propriétés</h1>
+      <div className="flex flex-grow flex-col gap-4">
+        <h2>Propriétés</h2>
         <div className="flex justify-start items-center gap-2">
           <Filters
             values={filters}
