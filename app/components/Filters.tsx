@@ -1,9 +1,9 @@
 import {ChangeEvent} from "react";
-import {FiltersPropsType} from "@/utils/types/filters";
+import {FiltersPropsType, FiltersType} from "@/utils/types/filters";
 
 export default function Filters({values, setValues, onSubmit}: FiltersPropsType) {
     const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setValues((prev: any) => ({
+        setValues((prev: FiltersType) => ({
             ...prev,
             [e.target.name]: Number(e.target.value),
         }));

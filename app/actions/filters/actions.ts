@@ -18,7 +18,7 @@ export async function updateFilters(formData: FiltersType) {
         );
 
         if (!res.ok) {
-            throw new Error("Failed to fetch data from external API");
+            console.error("Failed to fetch data from external API");
         }
 
         const data = await res.json();
@@ -26,7 +26,9 @@ export async function updateFilters(formData: FiltersType) {
         return {
             properties: data["hydra:member"] || [],
         };
-    } catch (error: any) {
-        throw new Error(error.message || "Internal Server Error");
+    } catch (error) {
+        let message = 'Unknown Error'
+        if (error instanceof Error) message = error.message
+        throw new Error(message);
     }
 }

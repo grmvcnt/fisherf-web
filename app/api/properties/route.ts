@@ -16,7 +16,9 @@ export async function GET() {
 
         const data = await res.json();
         return NextResponse.json(data);
-    } catch (error: any) {
-        return NextResponse.json({ error: "Internal Server Error", message: error.message }, { status: 500 });
+    } catch (error) {
+        let message = 'Unknown Error'
+        if (error instanceof Error) message = error.message
+        throw new Error(message);
     }
 }

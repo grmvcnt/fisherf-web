@@ -64,12 +64,16 @@ export default function AnalyticsPanel({
                 const queryParams = encodeQueryParams(data);
                 const res = await fetch(`/api/properties/similar/${queryParams}`);
 
-                if (!res.ok) throw new Error(`Erreur HTTP: ${res.status}`);
+                if (!res.ok) {
+                    console.error(`Erreur HTTP: ${res.status}`);
+                }
 
                 const result = await res.json();
                 setSimilarProperties(result["hydra:member"]);
-            } catch (err: any) {
-                setError(err.message);
+            } catch (error) {
+                let message = 'Erreur Inconnu';
+                if (error instanceof Error) message = error.message;
+                setError(message);
             }
         };
 

@@ -9,7 +9,7 @@ import Filters from "@/app/components/Filters";
 
 export default function Discover() {
   const [properties, setProperties] = useState<null | PropertyType[]>(null);
-  const [selectedProperty, setSelectedProperty] = useState(null);
+  const [selectedProperty, setSelectedProperty] = useState<string | null>(null);
   const [property, setProperty] = useState(null);
   const [error, setError] = useState<string | null>(null);
   const [loadingAnalytics, setLoadingAnalytics] = useState<boolean>(false);
@@ -25,17 +25,15 @@ export default function Discover() {
         const res = await fetch("/api/properties");
         const result = await res.json();
         setProperties(result['hydra:member']);
-      } catch (err: any) {
-        setError(err.message);
+      } catch (error) {
+        let message = 'Erreur Inconnu';
+        if (error instanceof Error) message = error.message;
+        setError(message);
       }
     }
 
     fetchProperties();
   }, []);
-
-  const handleOnPropertyCardClick = (e: any) => {
-    setSelectedProperty(e.currentTarget.id);
-  }
 
   useEffect(() => {
     async function fetchProperty() {
@@ -45,8 +43,10 @@ export default function Discover() {
         const result = await res.json();
         setProperty(result);
         setLoadingAnalytics(false);
-      } catch (err: any) {
-        setError(err.message);
+      } catch (error) {
+        let message = 'Erreur Inconnu';
+        if (error instanceof Error) message = error.message;
+        setError(message);
         setLoadingAnalytics(false);
       }
     }
@@ -63,8 +63,10 @@ export default function Discover() {
       setProperties(properties);
       setProperty(null);
       setLoadingFilters(false);
-    } catch (err: any) {
-      setError(err.message);
+    } catch (error) {
+      let message = 'Erreur Inconnu';
+      if (error instanceof Error) message = error.message;
+      setError(message);
       setLoadingFilters(false);
     }
   };
@@ -89,7 +91,7 @@ export default function Discover() {
                 <PropertyCard
                   key={key}
                   data={property}
-                  onPropertyCardClick={(e) => handleOnPropertyCardClick(e)}
+                  onPropertyCardClick={(e) => setSelectedProperty(e.currentTarget.id)}
                   isSelected={selectedProperty === property.uuid}
                 />
               ))}
