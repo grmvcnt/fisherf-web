@@ -5,7 +5,7 @@ export async function GET() {
         const res = await fetch("https://preprod-api.notif.immo/documents/properties?transactionType=0&withCoherentPrice=true", {
             headers: {
                 "Content-Type": "application/json",
-                "X-API-KEY": process.env.NEXT_PUBLIC_MELO_API_KEY || "",
+                "X-API-KEY": process.env.MELO_API_KEY || "",
             },
             method: "GET",
         });

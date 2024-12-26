@@ -11,7 +11,7 @@ export async function updateFilters(formData: FiltersType) {
             {
                 headers: {
                     "Content-Type": "application/json",
-                    "X-API-KEY": process.env.NEXT_PUBLIC_MELO_API_KEY || "",
+                    "X-API-KEY": process.env.MELO_API_KEY || "",
                 },
                 method: "GET",
             }
